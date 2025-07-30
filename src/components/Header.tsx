@@ -7,6 +7,7 @@ interface HeaderProps {
     totalPoints: number
   }
   onSignOut?: () => void
+}
 import { Trophy, User, LogOut } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import type { User as SupabaseUser } from '@supabase/supabase-js'
@@ -59,7 +60,6 @@ export function Header({ user, onAuthClick }: HeaderProps) {
                 Iniciar Sesión
               </button>
             )}
-            </a>
           </nav>
 
           {user ? (
