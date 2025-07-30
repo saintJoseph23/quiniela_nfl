@@ -72,6 +72,9 @@ export function GameCard({ game, prediction, onPredict, disabled = false }: Game
         <div 
           className={cn(
             "flex items-center justify-between p-3 rounded-lg border-2 transition-all cursor-pointer",
+            disabled
+              ? 'opacity-50 cursor-not-allowed'
+              : 
             prediction?.predictedWinner === game.awayTeam.id 
               ? "border-primary-500 bg-primary-50" 
               : "border-gray-200 hover:border-gray-300",
@@ -110,6 +113,9 @@ export function GameCard({ game, prediction, onPredict, disabled = false }: Game
         <div 
           className={cn(
             "flex items-center justify-between p-3 rounded-lg border-2 transition-all cursor-pointer",
+            disabled
+              ? 'opacity-50 cursor-not-allowed'
+              : 
             prediction?.predictedWinner === game.homeTeam.id 
               ? "border-primary-500 bg-primary-50" 
               : "border-gray-200 hover:border-gray-300",
@@ -149,6 +155,12 @@ export function GameCard({ game, prediction, onPredict, disabled = false }: Game
             <span className="text-gray-600">Confianza:</span>
             <span className="font-medium">{prediction.confidence}/10</span>
           </div>
+        </div>
+      )}
+      
+      {disabled && !prediction && (
+        <div className="mt-4 text-center text-sm text-gray-500 bg-gray-50 py-2 px-4 rounded-lg">
+          Inicia sesión para hacer predicciones
         </div>
       )}
     </div>
