@@ -43,13 +43,18 @@ function App() {
         updated[existingIndex] = newPrediction
         return updated
       } else {
+        return [...prev, newPrediction]
+      }
+    })
+  }
+
   // Show auth modal if user is not logged in
   React.useEffect(() => {
     if (!authLoading && !user) {
       setShowAuthModal(true)
     }
   }, [authLoading, user])
-      }
+      
   const handlePrediction = async (gameId: number, team: string) => {
     if (!user) {
       setShowAuthModal(true)
@@ -98,7 +103,10 @@ function App() {
                       prediction={getPredictionForGame(game.id)}
                       onPredict={handlePredict}
                     />
-            {gamesLoading ? (
+                  ))}
+                </div>
+              ) : (
+            gamesLoading ? (
               <div className="text-center py-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
                 <p className="text-gray-600">Cargando partidos...</p>
@@ -115,7 +123,8 @@ function App() {
                   />
                 ))}
               </div>
-            )}
+            ))}
+            </div>
           </div>
 
           {/* Sidebar */}
@@ -123,8 +132,6 @@ function App() {
             <Leaderboard 
               leaderboard={leaderboard} 
               loading={leaderboardLoading}
-            />
-              leaderboard={mockLeaderboard}
               currentUserId={currentUser.id}
             />
 
